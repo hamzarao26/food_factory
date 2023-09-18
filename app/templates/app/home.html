@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block main-content %}
+<!--Banner -->
+<div class="carousel slide" >
+  <img src="{% static 'app/images/banner/coverpic1.jpg' %}" class="d-block w-100 h-100px" alt="...">
+</div>
+<!-- End Banner Slider -->
+
+  <!-- 1st Product Slider -->
+  <div class="m-3">
+    <h2>Trending Deals</h2>
+    <!-- Slider 1 -->
+    <div class="container">
+      <div class="row">
+        {% for prod in products %}
+        <div class="col-sm-3 mb-4">
+          <div class="card">
+            <img src="{{ prod.product_img.url }}" class="card-img-top" alt="Product Image" height="200">
+            <div class="card-body">
+              <h5 class="card-title">{{ prod.title }}</h5>
+              
+              <a href="{% url 'product-detail' prod.id %}" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+  </div>
+  {% endblock main-content %}

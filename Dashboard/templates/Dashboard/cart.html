@@ -1,0 +1,92 @@
+{% extends "Dashboard/base.html" %}
+{% load static %}
+{% block dashboard %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url "Dashboard" %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div>
+                                        <h4 class="card-title">Cart</h4>
+                                        {% comment %} <h5 class="card-subtitle">Overview of Top Selling Items</h5> {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                <!-- title -->
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table v-middle">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Customer</th>
+                                            <th class="border-top-0">Product</th>
+                                            <th class="border-top-0">Quantity</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for crt in cart %}
+                                        
+                                        <tr>
+                                            <td>{{crt.id}}</td>
+                                                
+                                            
+                                            <td>{{crt.user.username}}</td>
+
+                                            <td><img src="{{crt.Product.product.product_img.url}}" height='100' width='100'> {{crt.Product}}</td>
+
+                                            {% comment %} <td>
+                                                <img src="{{prod.product_img.url}}" height='100' width='100'>  
+                                            </td> {% endcomment %}
+                                            <td>{{crt.quantity}}</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+            </div>
+
+            {% endblock dashboard %}

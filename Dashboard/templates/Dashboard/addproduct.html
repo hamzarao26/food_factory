@@ -1,0 +1,85 @@
+{% extends "Dashboard/base.html" %}
+{% load static %}
+{% block dashboard %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url "Dashboard" %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Product</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div>
+                                        <h4 class="card-title">All Product</h4>
+                                        {% comment %} <h5 class="card-subtitle">Overview of Top Selling Items</h5> {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                <!-- title -->
+                            </div>
+                            {% if messages %}
+                            {% for message  in messages %}
+                                <p {% if message.tags %} class='alert alert-{{ message.tags }} mb-5 {% endif %}'> {{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            <form method='POST' enctype="multipart/form-data"  class="form-horizontal form-material mx-2">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                <tr>
+                                <td>{{ field.label_tag }}</td>
+                                <td>{{ field }}</td>
+                                </tr>
+                                {% endfor %}
+                                
+                                <div class="form-group">
+                                    <div class="col-sm-12 p-2">
+                                        <button type='submit' class="btn btn-success text-white">Add Product</button>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+
+                
+            </div>
+
+            {% endblock dashboard %}

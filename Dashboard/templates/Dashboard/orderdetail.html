@@ -1,0 +1,111 @@
+{% extends "Dashboard/base.html" %}
+{% load static %}
+{% block dashboard %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url "Dashboard" %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Order Detail</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div>
+                                        <h4 class="card-title">Update Order</h4>
+                                        {% comment %} <h5 class="card-subtitle">Overview of Top Selling Items</h5> {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                <!-- title -->
+                            </div>
+                            {% if messages %}
+                            {% for message  in messages %}
+                                <p {% if message.tags %} class='alert alert-{{ message.tags }} mb-5 {% endif %}'> {{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            <form method='POST' class="form-horizontal form-material mx-2">
+                                {% csrf_token %}  
+                                <div class="form-group">
+                                    <label class="col-md-12">Customer Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{order.Customer.user.username}}" placeholder="Enter Name"
+                                            class="form-control form-control-line" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Product</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{order.product.product.title}}" placeholder="Enter Locality"
+                                            class="form-control form-control-line" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Quantity</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value='{{order.quantity}}' placeholder="Enter City"
+                                            class="form-control form-control-line" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Status</label>
+                                    <select class="form-control" name="status" id="exampleFormControlSelect1" onchange="this.form.submit()">
+                                        <option>Select Option</option>
+                                        <option value="Accepted" {% if order.status == 'Accepted' %}selected{% endif %}>Accepted</option>
+                                        <option value="Packed" {% if order.status == 'Packed' %}selected{% endif %}>Packed</option>
+                                        <option value="On the way" {% if order.status == 'On the way' %}selected{% endif %}>On the way</option>
+                                        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                                        <option value="Cancel" {% if order.status == 'Cancel' %}selected{% endif %}>Cancel</option>
+                                    </select>
+                                  </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-sm-12 p-2">
+                                        <a href='{% url "orderplaced" %}' type='button' class='btn btn-success'>OrderPlaced List</a>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+
+                
+            </div>
+
+            {% endblock dashboard %}

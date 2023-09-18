@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-sm-6 text-center align-self-center">
+      <img src="{{ product.product_img.url }}" alt="" class="img-fluid img-thumbnail">
+    </div>
+    <div class="col-sm-5 offset-sm-1">
+      <h2>Product Title: {{ product.title }}</h2>
+      <h6>Product Size: {{ product.product_size }}</h6>
+
+      <hr>
+      <p>{{ product.discription | safe }}</p>
+
+      {% if productdetail %}
+      {% for product_detail in productdetail %}
+      <div class="d-flex align-items-center" style="height:50px;">
+        <input name='prodsize' id='prodadd{{ forloop.counter }}' class="form-check-input" type="radio"
+          value="{{ product_detail.id }}">
+        <h6 style="margin:2px 3px">{{ product_detail.size }}:<small class="fw-light">{{ product_detail.price }}</small></h6>
+      </div>
+      <br>
+      <form action='/add-to-cart' class='d-inline'>
+        <input type='hidden' name='prod_id' value='{{ product.id }}' id='prod_id'>
+        <input type='hidden' name='prod_size' value='{{ product_detail.size }}'> <!-- Add this line -->
+        <button type=submit class='btn btn-primary shadow px-5 py-2'>Add to cart</button>
+      </form>
+      {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

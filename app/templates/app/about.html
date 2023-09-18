@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+{% block main-content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'app/css/style1.css' %}">
+
+</head>
+
+<body>
+
+  <div class="about" id="About">
+    <div class="about_main">
+
+      <div class="image">
+        <img src="{%static 'app/images/about.png' %}">
+      </div>
+
+      <div class="about_text">
+        <h1><span>About</span>Us</h1>
+        <h3>Welcome to The Food Factory, where flavor meets speed and satisfaction!</h3>
+        <p>
+          Our menu is a tantalizing symphony of flavors, offering a diverse range of mouthwatering options to suit every palate. Whether you're in the mood for a classic burger that oozes nostalgia, a crisp and vibrant salad that's as fresh as it gets, or a hearty sandwich that's the epitome of comfort, we've got you covered.<br>
+          What sets us apart is our commitment to using only the finest ingredients every patty, every bun, every sauce is chosen with care to ensure your taste experience is nothing short of exceptional. And, of course, we understand the value of time, which is why we've perfected the art of swift service without compromising on quality.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+
+
+{% endblock main-content %}

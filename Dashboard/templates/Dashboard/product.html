@@ -1,0 +1,145 @@
+{% extends "Dashboard/base.html" %}
+{% load static %}
+{% block dashboard %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url "Dashboard" %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Product</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div>
+                                        <h4 class="card-title">All Product</h4>
+                                        {% comment %} <h5 class="card-subtitle">Overview of Top Selling Items</h5> {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                <!-- title -->
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="table v-middle">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Title</th>
+
+                                            <th class="border-top-0">Description</th>
+                                            <th class="border-top-0">Category</th>
+                                            <th class="border-top-0">Product Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td>
+                                                <a href=''>
+                                                {{product.id}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{product.title}}
+                                            </td>
+                                            <td>{{product.discription}}</td>
+                                            <td>{{product.category}}</td>
+                                            <td>
+                                                <img src="{{product.product_img.url}}" height='100' width='100'>
+                                                
+                                            </td>
+                                           
+                                        </tr>
+                                        
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+
+                <form id="formset-form" method="post">
+                    {% csrf_token %}
+                    <div id="formset-container">
+                    </div>
+                    <button type="button" class="btn btn-primary m-4" id="add-formset">Add Detail</button>
+                    <button type="submit" class="btn btn-success m-4">Submit</button>
+                  </form>
+                  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                  <script>
+                    $(document).ready(function () {
+                      // Initialize formset with initial form
+                      const formsetContainer = $('#formset-container');
+                      const addFormsetButton = $('#add-formset');
+      
+                      function addFormset() {
+                        const formsetIndex = formsetContainer.children('.formset').length;
+                        const formsetHTML = `
+                                  <div class="formset card mb-3">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                        {{ productdetail.management_form }}
+                                        {% for form in productdetail %}
+                                            {{ form.as_table }}
+                                        {% endfor %}
+                                        {% comment %} <label for="id_formset-${formsetIndex}-field">Field ${formsetIndex + 1}:</label>
+                                        <input type="text" name="formset-${formsetIndex}-field" class="form-control" id="id_formset-${formsetIndex}-field"> {% endcomment %}
+                                      </div>
+                                      <button type="button" class="btn btn-danger mt-3" id="cancel-formset">Cancel</button>
+                                      <input type='hidden' name='add_product_detail' value='1'>
+                                      <input type='hidden' value='{{product.id}}'>
+
+                                    </div>
+                                  </div>
+                                `;
+                        formsetContainer.append(formsetHTML);
+                      }
+                      addFormsetButton.click(function () {
+                        addFormset();
+                      });
+                      formsetContainer.on('click', '#cancel-formset', function () {
+                        $(this).closest('.formset').remove();
+                      });
+                    });
+                  </script>
+            </div>
+
+            {% endblock dashboard %}

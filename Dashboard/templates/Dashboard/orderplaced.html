@@ -1,0 +1,95 @@
+{% extends "Dashboard/base.html" %}
+{% load static %}
+{% block dashboard %}
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-5">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url "Dashboard" %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Order Placed</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                
+                <!-- Table -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div>
+                                        <h4 class="card-title">All Product</h4>
+                                        {% comment %} <h5 class="card-subtitle">Overview of Top Selling Items</h5> {% endcomment %}
+                                    </div>
+                                    
+                                </div>
+                                <!-- title -->
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table v-middle">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">Customer</th>
+                                            <th class="border-top-0">Product</th>
+                                            <th class="border-top-0">Order Date</th>
+                                            <th class="border-top-0">Quantity</th>
+                                            <th class="border-top-0">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ord in order %}
+                                        <tr>
+                                            <td><a href='{% url "orderdetail" ord.id %}'>{{ord.id}}</a></td>
+                                                
+                                            
+                                            <td>{{ord.Customer.name}}</td>
+
+                                            <td>{{ord.product}}</td>
+                                            <td>{{ord.order_data}}</td>
+                                            {% comment %} <td>
+                                                <img src="{{prod.product_img.url}}" height='100' width='100'>  
+                                            </td> {% endcomment %}
+                                            <td>{{ord.quantity}}</td>
+                                            <td>{{ord.status}}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+            </div>
+
+            {% endblock dashboard %}
